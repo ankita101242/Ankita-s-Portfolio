@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ankita Agrawal — Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0e0e0e;
+      --paper: #f5f2ec;
+      --accent: #b5461b;
+      --muted: #7a7568;
+      --rule: #d8d3ca;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --mono: 'DM Mono', 'Courier New', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 2rem;
+      padding: 4rem 6rem 2rem;
+      border-bottom: 1px solid var(--rule);
+      animation: fadeUp .9s ease both;
+    }
+
+    .name-block h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 300;
+      letter-spacing: -.01em;
+      line-height: 1.05;
+    }
+    .name-block h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .name-block .role {
+      font-family: var(--mono);
+      font-size: .78rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: .6rem;
+    }
+
+    .contact-block {
+      text-align: right;
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--muted);
+      line-height: 2;
+    }
+    .contact-block a {
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .contact-block a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      gap: 2.5rem;
+      padding: .9rem 6rem;
+      border-bottom: 1px solid var(--rule);
+      position: sticky;
+      top: 0;
+      background: rgba(245,242,236,.94);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      animation: fadeUp .9s .1s ease both;
+    }
+    nav a {
+      font-family: var(--mono);
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--ink); }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 6rem;
+    }
+
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--rule);
+      animation: fadeUp .8s ease both;
+    }
+    section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-text {
+      max-width: 640px;
+      font-size: 1.35rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: #2a2a2a;
+    }
+    .about-text strong { font-weight: 600; }
+
+    /* ── EXPERIENCE ── */
+    .entry {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 1rem 3rem;
+      margin-bottom: 3rem;
+    }
+    .entry:last-child { margin-bottom: 0; }
+    .entry-meta {
+      text-align: right;
+      padding-top: .15rem;
+    }
+    .entry-meta .date {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+    }
+    .entry-meta .tag {
+      display: inline-block;
+      margin-top: .4rem;
+      font-family: var(--mono);
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: var(--accent);
+      padding: .15rem .55rem;
+      border-radius: 2px;
+    }
+    .entry-body h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: .15rem;
+    }
+    .entry-body .org {
+      font-family: var(--mono);
+      font-size: .73rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+      margin-bottom: .75rem;
+    }
+    .entry-body ul {
+      list-style: none;
+      padding: 0;
+    }
+    .entry-body ul li {
+      font-size: .98rem;
+      color: #333;
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: .35rem;
+      line-height: 1.6;
+    }
+    .entry-body ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: .8rem;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .project-card {
+      border: 1px solid var(--rule);
+      padding: 1.8rem;
+      transition: border-color .25s, transform .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 70%, rgba(181,70,27,.06));
+      pointer-events: none;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+    .project-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: .5rem;
+    }
+    .project-card p {
+      font-size: .93rem;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+    .stack span {
+      font-family: var(--mono);
+      font-size: .62rem;
+      letter-spacing: .06em;
+      color: var(--muted);
+      border: 1px solid var(--rule);
+      padding: .12rem .5rem;
+      border-radius: 2px;
+    }
+
+    /* ── RESEARCH ── */
+    .research-card {
+      border-left: 2px solid var(--accent);
+      padding-left: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .research-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: .35rem; }
+    .research-card p { font-size: .95rem; color: #444; line-height: 1.65; margin-bottom: .75rem; }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .skill-group h4 {
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .75rem;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: .4rem;
+    }
+    .skill-group ul { list-style: none; }
+    .skill-group ul li {
+      font-size: .92rem;
+      color: #333;
+      padding: .25rem 0;
+      border-bottom: 1px dotted var(--rule);
+      font-family: var(--mono);
+      font-size: .78rem;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-entry {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 1rem 3rem;
+      margin-bottom: 2.5rem;
+    }
+    .edu-entry:last-child { margin-bottom: 0; }
+    .edu-meta {
+      text-align: right;
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--muted);
+      padding-top: .15rem;
+      line-height: 1.9;
+    }
+    .edu-body h3 { font-size: 1.1rem; font-weight: 600; }
+    .edu-body .inst { font-family: var(--mono); font-size: .73rem; color: var(--muted); margin: .2rem 0 .3rem; }
+    .edu-body .cgpa { font-size: .9rem; color: var(--accent); font-weight: 600; font-family: var(--mono); }
+
+    /* ── EXTRA ── */
+    .extras-list { list-style: none; }
+    .extras-list li {
+      font-size: .97rem;
+      color: #333;
+      padding: .6rem 0;
+      border-bottom: 1px dotted var(--rule);
+      display: flex;
+      gap: 1rem;
+      align-items: baseline;
+    }
+    .extras-list li .ex-label {
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      min-width: 100px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 3rem 6rem;
+      font-family: var(--mono);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 820px) {
+      header, nav, main, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .contact-block { text-align: left; }
+      nav { gap: 1.5rem; flex-wrap: wrap; }
+      .entry, .edu-entry { grid-template-columns: 1fr; }
+      .entry-meta, .edu-meta { text-align: left; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="name-block">
+    <h1>Ankita <em>Agrawal</em></h1>
+    <p class="role">Software Engineer &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; ML Research</p>
+  </div>
+  <div class="contact-block">
+    <div>+91 80856 18934</div>
+    <div><a href="https://linkedin.com/in/ankita-agrawal12" target="_blank">linkedin.com/in/ankita-agrawal12</a></div>
+    <div><a href="https://github.com/ankita101242" target="_blank">github.com/ankita101242</a></div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#projects">Projects</a>
+  <a href="#research">Research</a>
+  <a href="#skills">Skills</a>
+  <a href="#education">Education</a>
+</nav>
+
+<main>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <p class="about-text">
+      I am a <strong>Master's student in Computer Science</strong> at IIIT Bangalore, specialising in full-stack engineering and applied machine learning. I build reliable backend systems and experiment with vision-language models — bridging the gap between infrastructure and intelligence.
+    </p>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">Experience</p>
+
+    <div class="entry">
+      <div class="entry-meta">
+        <div class="date">Jan 2025 –<br>Jul 2025</div>
+        <div class="tag">Internship</div>
+      </div>
+      <div class="entry-body">
+        <h3>Software Engineer</h3>
+        <p class="org">American Express</p>
+        <ul>
+          <li>Contributed to backend development of an enterprise storage and archival platform, adding comprehensive unit tests to improve code reliability.</li>
+          <li>Investigated and resolved security vulnerabilities across frontend and backend components to enhance application safety.</li>
+          <li>Designed an automated testing suite using the Cucumber BDD framework, streamlining backend service validation and improving test coverage.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <h3>Prose Petal</h3>
+        <p>A DevOps-enabled full-stack blogging platform with CI/CD via Jenkins, Docker &amp; Ansible — achieving a 50% boost in deployment efficiency.</p>
+        <div class="stack">
+          <span>React.js</span><span>Spring Boot</span><span>MySQL</span><span>Docker</span><span>Jenkins</span><span>Ansible</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>RadiologyPlus</h3>
+        <p>Tele-radiology platform for doctors, radiologists, and patients — featuring OHIF viewer integration for DICOM image annotation and diagnosis.</p>
+        <div class="stack">
+          <span>React.js</span><span>Spring Boot</span><span>MySQL</span><span>JWT</span><span>Material-UI</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>Visual Question Answering</h3>
+        <p>Fine-tuned a VQA model using BERT and ViT with and without LoRA, evaluating accuracy, F1, precision, recall, and training time.</p>
+        <div class="stack">
+          <span>PyTorch</span><span>LoRA</span><span>BERT</span><span>ViT</span><span>Transformers</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>Course Management System</h3>
+        <p>Centralised academia platform for students, faculty, and admins using C, system calls, IPC, and socket programming for secure data management.</p>
+        <div class="stack">
+          <span>C</span><span>Socket Programming</span><span>IPC</span><span>File System</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <p class="section-label">Research</p>
+
+    <div class="research-card">
+      <h3>ScenarioDB &nbsp;<span style="font-family:var(--mono);font-size:.7rem;color:var(--muted);font-weight:400;">Nov 2024</span></h3>
+      <p>Fine-tuned the Video-LLaVA-7B model on multiple datasets to generate high-quality video captions. Developed frame-wise captioning with merging and refined prompt engineering, achieving consistency across datasets. Built a benchmark evaluation system using manual annotation and cosine similarity on BERT embeddings — attaining a similarity score of ~70%.</p>
+      <div class="stack">
+        <span>Python</span><span>PyTorch</span><span>Video-LLaVA-7B</span><span>BERT</span><span>Video2Dataset</span><span>Prompt Engineering</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">Technical Skills</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <ul>
+          <li>C / C++</li>
+          <li>Java</li>
+          <li>JavaScript</li>
+          <li>HTML5 / CSS</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Frameworks &amp; Libraries</h4>
+        <ul>
+          <li>Spring Boot / Vert.x</li>
+          <li>React.js</li>
+          <li>TensorFlow / PyTorch</li>
+          <li>Hugging Face</li>
+          <li>Pandas / NumPy</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Tools &amp; Platforms</h4>
+        <ul>
+          <li>Jenkins / Docker / Ansible</li>
+          <li>Git / GitHub</li>
+          <li>Postman</li>
+          <li>IntelliJ / VS Code</li>
+          <li>Cucumber BDD</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label">Education</p>
+
+    <div class="edu-entry">
+      <div class="edu-meta">Aug 2023 –<br>Jul 2025</div>
+      <div class="edu-body">
+        <h3>M.Tech, Computer Science &amp; Engineering</h3>
+        <p class="inst">International Institute of Information Technology, Bangalore</p>
+        <p class="cgpa">CGPA 3.48 / 4.0</p>
+      </div>
+    </div>
+
+    <div class="edu-entry">
+      <div class="edu-meta">Aug 2019 –<br>Jun 2023</div>
+      <div class="edu-body">
+        <h3>B.Tech, Computer Science &amp; Engineering</h3>
+        <p class="inst">Bhilai Institute of Technology, Durg</p>
+        <p class="cgpa">CGPA 8.70 / 10.0</p>
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <p class="section-label" style="margin-top:3rem;">Certifications</p>
+    <ul class="extras-list">
+      <li><span class="ex-label">O'Reilly</span> Java from Scratch</li>
+      <li><span class="ex-label">LinkedIn</span> Java: Advanced Concepts for High-Performance Development</li>
+      <li><span class="ex-label">Coursera</span> Machine Learning Specialization</li>
+      <li><span class="ex-label">Udemy</span> Complete C++ Course</li>
+      <li><span class="ex-label">edX</span> Introduction to CS and Programming Using Python</li>
+    </ul>
+
+    <!-- Achievements -->
+    <p class="section-label" style="margin-top:3rem;">Achievements &amp; Extra-curriculars</p>
+    <ul class="extras-list">
+      <li><span class="ex-label">Qualification</span> Cleared UGC NET (December 2022)</li>
+      <li><span class="ex-label">Leadership</span> Cultural Secretary (2017), Disciplinary Secretary (2018), Class Representative (B.Tech)</li>
+      <li><span class="ex-label">Design</span> 1st rank in on-campus painting competition; created promotional material for club events</li>
+      <li><span class="ex-label">Outreach</span> Manages "Upcoming Universe" — an environmental awareness page with 1,619+ followers</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2025 Ankita Agrawal &nbsp;·&nbsp; Built for Netlify
+</footer>
+
+</body>
+</html>
